@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.UserDemoViewController"
+            styleClass="page">
+
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="topbar">
+            <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+            <Label text="USER MODE " styleClass="titleSmall"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Retour" onAction="#back" styleClass="secondary"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="12" styleClass="card">
+            <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+
+            <Label text="Charger un Wallet par wallet_id (temporaire, sans login)" styleClass="sectionTitle"/>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="wallet_id:"/>
+                <TextField fx:id="tfWalletId" promptText="ex: 1" prefWidth="140"/>
+                <Button text="Charger" onAction="#loadWallet" styleClass="primary"/>
+                <Button text="Refresh" onAction="#refreshAll" styleClass="secondary"/>
+            </HBox>
+
+            <Label fx:id="lblInfo" text="" styleClass="hint"/>
+
+            <HBox spacing="16" alignment="CENTER_LEFT">
+                <Label fx:id="lblWallet" text="Wallet: -" styleClass="chip"/>
+                <Label fx:id="lblBalance" text="Balance: -" styleClass="chipStrong"/>
+                <Label fx:id="lblReserved" text="Reserved: -" styleClass="chip"/>
+            </HBox>
+
+            <Separator/>
+
+            <Label text="Opération" styleClass="sectionTitle"/>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Type:"/>
+                <ComboBox fx:id="cbType" prefWidth="160"/>
+
+                <Label text="Montant:"/>
+                <TextField fx:id="tfAmount" promptText="ex: 50.00" prefWidth="160"/>
+
+                <Label text="Ref (opt):"/>
+                <TextField fx:id="tfRef" promptText="ex: 123" prefWidth="140"/>
+
+                <Button text="Valider" onAction="#submit" styleClass="primary"/>
+            </HBox>
+
+            <Label fx:id="lblOpMsg" text="" styleClass="hint"/>
+
+            <Separator/>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Historique Transactions" styleClass="sectionTitle"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Clear Selection" onAction="#clearSelection" styleClass="secondary"/>
+            </HBox>
+
+            <TableView fx:id="txTable" prefHeight="420">
+                <columns>
+                    <TableColumn fx:id="colTxId" text="tx_id" prefWidth="90"/>
+                    <TableColumn fx:id="colTxAmount" text="amount" prefWidth="150"/>
+                    <TableColumn fx:id="colTxType" text="type" prefWidth="120"/>
+                    <TableColumn fx:id="colTxRef" text="ref" prefWidth="120"/>
+                    <TableColumn fx:id="colTxStatus" text="status" prefWidth="120"/>
+                    <TableColumn fx:id="colTxCreated" text="created_at" prefWidth="180"/>
+                </columns>
+            </TableView>
+
+        </VBox>
+    </center>
+
+</BorderPane>

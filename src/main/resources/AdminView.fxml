@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.AdminViewController"
+            styleClass="page">
+
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="topbar">
+            <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+            <Label text="ADMIN PANEL" styleClass="titleSmall"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Retour" onAction="#back" styleClass="secondary"/>
+        </HBox>
+    </top>
+
+    <center>
+        <SplitPane dividerPositions="0.45">
+            <items>
+
+                <!-- LEFT: Wallet management -->
+                <VBox spacing="10" styleClass="card">
+                    <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Wallet Management" styleClass="sectionTitle"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="Refresh" onAction="#refreshWallets" styleClass="secondary"/>
+                    </HBox>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Button text="Créer Wallet" onAction="#openCreateWalletWindow" styleClass="primary"/>
+                        <Button text="Supprimer" onAction="#deleteWallet" styleClass="danger"/>
+                        <Button text="Clear" onAction="#clearSelection" styleClass="secondary"/>
+                    </HBox>
+
+                    <Label fx:id="lblWalletMsg" text="" styleClass="hint"/>
+
+                    <TableView fx:id="walletTable" prefHeight="520">
+                        <columns>
+                            <TableColumn fx:id="colWalletId" text="wallet_id" prefWidth="120"/>
+                            <TableColumn fx:id="colUserId" text="user_id" prefWidth="120"/>
+                            <TableColumn fx:id="colBalance" text="balance" prefWidth="200"/>
+                            <TableColumn fx:id="colReserved" text="reserved_balance" prefWidth="200"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+
+                <!-- RIGHT: Transactions -->
+                <VBox spacing="10" styleClass="card">
+                    <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Transactions (read-only)" styleClass="sectionTitle"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="Refresh" onAction="#refreshTx" styleClass="secondary"/>
+                    </HBox>
+
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Filtre wallet_id:"/>
+                        <TextField fx:id="tfFilterWalletId" promptText="ex: 2" prefWidth="160"/>
+                        <Button text="Filtrer" onAction="#filterTx" styleClass="primary"/>
+                        <Button text="Reset" onAction="#refreshTx" styleClass="secondary"/>
+                    </HBox>
+
+                    <Label fx:id="lblTxMsg" text="" styleClass="hint"/>
+
+                    <TableView fx:id="txTable" prefHeight="560">
+                        <columns>
+                            <TableColumn fx:id="colTxId" text="transaction_id" prefWidth="110"/>
+                            <TableColumn fx:id="colTxWalletId" text="wallet_id" prefWidth="90"/>
+                            <TableColumn fx:id="colTxAmount" text="amount" prefWidth="160"/>
+                            <TableColumn fx:id="colTxType" text="type" prefWidth="130"/>
+                            <TableColumn fx:id="colTxRef" text="reference_id" prefWidth="130"/>
+                            <TableColumn fx:id="colTxStatus" text="status" prefWidth="120"/>
+                            <TableColumn fx:id="colTxCreated" text="created_at" prefWidth="190"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+
+            </items>
+        </SplitPane>
+    </center>
+
+</BorderPane>
