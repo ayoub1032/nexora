@@ -1,0 +1,314 @@
+/* ========================================
+   NEXORA - GLOBAL STYLES
+   ======================================== */
+
+/* Root Variables - Color Palette */
+.root {
+    /* Primary Colors */
+    -fx-primary: #14B8A6;
+    -fx-primary-dark: #0F766E;
+    -fx-primary-light: #2DD4BF;
+    
+    /* Background Colors */
+    -fx-bg-dark: #0F3D39;
+    -fx-bg-dark-lighter: #1A4D47;
+    -fx-bg-light: #F5F5F5;
+    -fx-bg-white: #FFFFFF;
+    
+    /* Text Colors */
+    -fx-text-dark: #1F2937;
+    -fx-text-light: #6B7280;
+    -fx-text-white: #FFFFFF;
+    
+    /* Status Colors */
+    -fx-success: #10B981;
+    -fx-error: #EF4444;
+    -fx-warning: #F59E0B;
+    -fx-info: #3B82F6;
+    
+    /* Shadows */
+    -fx-shadow-sm: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    -fx-shadow-md: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    -fx-shadow-lg: 0px 10px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* ========================================
+   BACKGROUNDS
+   ======================================== */
+
+.dark-background {
+    -fx-background-color: -fx-bg-dark;
+}
+
+.light-background {
+    -fx-background-color: -fx-bg-light;
+}
+
+/* ========================================
+   CARDS
+   ======================================== */
+
+.card {
+    -fx-background-color: -fx-bg-white;
+    -fx-background-radius: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 4);
+    -fx-padding: 40px;
+}
+
+.card-header {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-text-dark;
+}
+
+.card-subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: -fx-text-light;
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+.btn {
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 24px;
+    -fx-border-width: 0;
+}
+
+.btn-primary {
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: white;
+}
+
+.btn-primary:hover {
+    -fx-background-color: -fx-primary-dark;
+    -fx-effect: dropshadow(gaussian, rgba(20, 184, 166, 0.3), 8, 0, 0, 2);
+}
+
+.btn-primary:pressed {
+    -fx-background-color: #0D5F57;
+}
+
+.btn-secondary {
+    -fx-background-color: white;
+    -fx-text-fill: -fx-text-dark;
+    -fx-border-color: #E5E7EB;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: -fx-bg-light;
+}
+
+.btn-link {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-primary;
+    -fx-underline: false;
+    -fx-cursor: hand;
+    -fx-padding: 4px 8px;
+}
+
+.btn-link:hover {
+    -fx-text-fill: -fx-primary-dark;
+}
+
+/* ========================================
+   INPUT FIELDS
+   ======================================== */
+
+.input-field {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-border-color: #E5E7EB;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+    -fx-padding: 12px 16px;
+    -fx-font-size: 14px;
+    -fx-text-fill: -fx-text-dark;
+}
+
+.input-field:focused {
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(20, 184, 166, 0.2), 4, 0, 0, 0);
+}
+
+.password-field {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-border-color: #E5E7EB;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+    -fx-padding: 12px 16px;
+    -fx-font-size: 14px;
+}
+
+.password-field:focused {
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 2px;
+}
+
+/* ========================================
+   LABELS
+   ======================================== */
+
+.label {
+    -fx-text-fill: -fx-text-dark;
+    -fx-font-size: 14px;
+}
+
+.label-title {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-text-dark;
+}
+
+.label-subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: -fx-text-light;
+}
+
+.field-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-text-dark;
+    -fx-text-transform: uppercase;
+    -fx-letter-spacing: 0.5px;
+}
+
+.error-label {
+    -fx-text-fill: -fx-error;
+    -fx-font-size: 12px;
+}
+
+.success-label {
+    -fx-text-fill: -fx-success;
+    -fx-font-size: 12px;
+}
+
+/* ========================================
+   SIDEBAR (for Profile/Register)
+   ======================================== */
+
+.sidebar {
+    -fx-background-color: -fx-bg-dark;
+    -fx-padding: 30px 20px;
+}
+
+.sidebar-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 12px 20px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.sidebar-item:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-item.active {
+    -fx-background-color: -fx-primary;
+}
+
+.sidebar-step {
+    -fx-text-fill: rgba(255, 255, 255, 0.6);
+    -fx-font-size: 13px;
+    -fx-padding: 10px 20px;
+}
+
+.sidebar-step.active {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.sidebar-step.completed {
+    -fx-text-fill: -fx-primary-light;
+}
+
+/* ========================================
+   DIVIDER
+   ======================================== */
+
+.divider {
+    -fx-background-color: #E5E7EB;
+    -fx-pref-height: 1px;
+}
+
+.divider-text {
+    -fx-text-fill: -fx-text-light;
+    -fx-font-size: 12px;
+}
+
+/* ========================================
+   ICONS & BADGES
+   ======================================== */
+
+.icon {
+    -fx-fill: -fx-primary;
+}
+
+.badge {
+    -fx-background-color: -fx-primary;
+    -fx-background-radius: 12px;
+    -fx-padding: 4px 12px;
+    -fx-text-fill: white;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.badge-success {
+    -fx-background-color: -fx-success;
+}
+
+.badge-error {
+    -fx-background-color: -fx-error;
+}
+
+/* ========================================
+   PROGRESS INDICATOR
+   ======================================== */
+
+.progress-indicator {
+    -fx-background-color: #E5E7EB;
+    -fx-background-radius: 10px;
+    -fx-pref-height: 4px;
+}
+
+.progress-bar {
+    -fx-background-color: -fx-primary;
+    -fx-background-radius: 10px;
+}
+
+/* ========================================
+   HYPERLINKS
+   ======================================== */
+
+.hyperlink {
+    -fx-text-fill: -fx-primary;
+    -fx-underline: false;
+    -fx-cursor: hand;
+    -fx-padding: 0;
+    -fx-border-width: 0;
+}
+
+.hyperlink:hover {
+    -fx-text-fill: -fx-primary-dark;
+    -fx-underline: true;
+}
+
+/* ========================================
+   SECURITY BADGE
+   ======================================== */
+
+.security-badge {
+    -fx-text-fill: -fx-text-light;
+    -fx-font-size: 11px;
+    -fx-padding: 8px 0;
+}

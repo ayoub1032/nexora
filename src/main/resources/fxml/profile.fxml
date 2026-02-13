@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.nexora.controllers.ProfileController"
+            prefWidth="1400" prefHeight="900">
+
+    <!-- Top Navigation Bar -->
+    <top>
+        <HBox styleClass="light-background" alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15px 30px; -fx-border-color: #E5E7EB; -fx-border-width: 0 0 1px 0;">
+            <Label text="🔷" style="-fx-font-size: 24px; -fx-text-fill: #14B8A6;"/>
+            <Label text="NEXORA" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1F2937;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="userNameLabel" text="Alex Morgan" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+            <Label fx:id="verifiedBadge" text="● Verified Account" style="-fx-text-fill: #10B981; -fx-font-size: 12px;"/>
+        </HBox>
+    </top>
+
+    <!-- Left Sidebar -->
+    <left>
+        <VBox styleClass="light-background" prefWidth="220" spacing="5" style="-fx-padding: 20px; -fx-border-color: #E5E7EB; -fx-border-width: 0 1px 0 0;">
+            
+            <Label text="MENU" style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #9CA3AF; -fx-padding: 10px 15px;"/>
+            
+            <Button text="📊 Dashboard" styleClass="sidebar-item" prefWidth="180"/>
+            <Button text="📈 Trading" styleClass="sidebar-item" prefWidth="180"/>
+            <Button text="💼 Wallet" styleClass="sidebar-item" prefWidth="180"/>
+            
+            <Label text="SETTINGS" style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #9CA3AF; -fx-padding: 20px 15px 10px 15px;"/>
+            
+            <Button text="👤 Profile &amp; Security" styleClass="sidebar-item, active" prefWidth="180"/>
+            <Button text="🔔 Notifications" styleClass="sidebar-item" prefWidth="180"/>
+            <Button text="📄 Documents" styleClass="sidebar-item" prefWidth="180"/>
+            
+            <Region VBox.vgrow="ALWAYS"/>
+            
+            <Button fx:id="logoutButton" text="🚪 Logout" styleClass="btn, btn-secondary" prefWidth="180" onAction="#handleLogout">
+                <VBox.margin>
+                    <Insets top="20"/>
+                </VBox.margin>
+            </Button>
+        </VBox>
+    </left>
+
+    <!-- Main Content -->
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: #F5F5F5;">
+            <VBox spacing="30" style="-fx-padding: 40px;">
+                
+                <!-- Header -->
+                <VBox spacing="5">
+                    <Label text="Security &amp; Profile" styleClass="label-title"/>
+                    <Label text="Manage your account settings and secure your financial data." styleClass="label-subtitle"/>
+                </VBox>
+                
+                <!-- Main Content Grid -->
+                <HBox spacing="25" alignment="TOP_LEFT">
+                    
+                    <!-- Left Column: Profile Info -->
+                    <VBox spacing="25" prefWidth="380">
+                        
+                        <!-- User Profile Card -->
+                        <VBox styleClass="card" spacing="20">
+                            <Label text="User Profile" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                            
+                            <!-- Avatar Section -->
+                            <VBox alignment="CENTER" spacing="10">
+                                <Label text="👤" style="-fx-font-size: 64px; -fx-background-color: #E5E7EB; -fx-background-radius: 50%; -fx-min-width: 120px; -fx-min-height: 120px; -fx-alignment: center;"/>
+                                <Label fx:id="profileNameLabel" text="Alex Morgan" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                                <Label fx:id="profileEmailLabel" text="alex.morgan@nexora.fin" style="-fx-font-size: 13px; -fx-text-fill: #6B7280;"/>
+                                <Label fx:id="memberSinceLabel" text="Member since 2021" style="-fx-font-size: 12px; -fx-text-fill: #14B8A6;"/>
+                            </VBox>
+                            
+                            <VBox styleClass="divider"/>
+                            
+                            <!-- Editable Fields -->
+                            <VBox spacing="12">
+                                <Label text="Full Name" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
+                                <TextField fx:id="fullNameField" styleClass="input-field"/>
+                            </VBox>
+                            
+                            <VBox spacing="12">
+                                <Label text="Email Address" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
+                                <TextField fx:id="emailProfileField" styleClass="input-field"/>
+                            </VBox>
+                            
+                            <VBox spacing="12">
+                                <Label text="Phone Number" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
+                                <TextField fx:id="phoneProfileField" styleClass="input-field"/>
+                            </VBox>
+                            
+                            <Button text="Save Changes" styleClass="btn, btn-primary" onAction="#handleSaveProfile"/>
+                        </VBox>
+                        
+                        <!-- Current Session Card -->
+                        <VBox styleClass="card" spacing="15">
+                            <Label text="CURRENT SESSION" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
+                            
+                            <HBox spacing="15" alignment="CENTER_LEFT">
+                                <Label text="💻" style="-fx-font-size: 32px;"/>
+                                <VBox spacing="3">
+                                    <Label fx:id="sessionDeviceLabel" text="Windows 11 PC" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                                    <Label fx:id="sessionLocationLabel" text="Chrome • San Francisco, US" style="-fx-font-size: 12px; -fx-text-fill: #6B7280;"/>
+                                    <Label text="Active Now" style="-fx-font-size: 11px; -fx-text-fill: #10B981; -fx-font-weight: bold;"/>
+                                </VBox>
+                            </HBox>
+                        </VBox>
+                        
+                    </VBox>
+                    
+                    <!-- Right Column: Security Settings -->
+                    <VBox spacing="25" HBox.hgrow="ALWAYS">
+                        
+                        <!-- Password Management Card -->
+                        <VBox styleClass="card" spacing="20">
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <VBox HBox.hgrow="ALWAYS">
+                                    <Label text="Password Management" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                                    <Label text="Update your password regularly to stay safe." style="-fx-font-size: 13px; -fx-text-fill: #6B7280;"/>
+                                </VBox>
+                                <Label text="🔒" style="-fx-font-size: 32px; -fx-text-fill: #9CA3AF;"/>
+                            </HBox>
+                            
+                            <VBox spacing="12">
+                                <Label text="Current Password" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
+                                <PasswordField fx:id="currentPasswordField" styleClass="password-field" promptText="••••••••••"/>
+                            </VBox>
+                            
+                            <HBox spacing="15">
+                                <VBox spacing="12" HBox.hgrow="ALWAYS">
+                                    <Label text="New Password" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
+                                    <PasswordField fx:id="newPasswordField" styleClass="password-field" promptText="••••••••••"/>
+                                </VBox>
+                                <VBox spacing="12" HBox.hgrow="ALWAYS">
+                                    <Label text="Confirm New Password" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
+                                    <PasswordField fx:id="confirmNewPasswordField" styleClass="password-field" promptText="••••••••••"/>
+                                </VBox>
+                            </HBox>
+                            
+                            <HBox alignment="CENTER_LEFT" spacing="10">
+                                <Hyperlink text="Forgot Password?" styleClass="hyperlink" onAction="#handleForgotPassword"/>
+                                <Region HBox.hgrow="ALWAYS"/>
+                                <Button text="Update Password" styleClass="btn, btn-primary" onAction="#handleUpdatePassword"/>
+                            </HBox>
+                        </VBox>
+                        
+                        <!-- Advanced Security Card -->
+                        <VBox styleClass="card" spacing="25">
+                            <Label text="Advanced Security" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                            
+                            <!-- Two-Factor Authentication -->
+                            <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 15px; -fx-background-color: #F9FAFB; -fx-background-radius: 8px;">
+                                <Label text="📱" style="-fx-font-size: 32px;"/>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label text="Two-Factor Authentication (2FA)" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                                    <Label text="Secure your account with an authentication app like Google Authenticator or Authy." style="-fx-font-size: 12px; -fx-text-fill: #6B7280;" wrapText="true"/>
+                                    <HBox spacing="5" alignment="CENTER_LEFT">
+                                        <VBox.margin>
+                                            <Insets top="5"/>
+                                        </VBox.margin>
+                                        <Label text="●" style="-fx-text-fill: #10B981; -fx-font-size: 16px;"/>
+                                        <Label text="Enabled" style="-fx-text-fill: #10B981; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                                    </HBox>
+                                </VBox>
+                                <Button text="Configure" styleClass="btn, btn-secondary" prefWidth="110"/>
+                            </HBox>
+                            
+                            <!-- Face ID -->
+                            <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 15px; -fx-background-color: #F9FAFB; -fx-background-radius: 8px;">
+                                <Label text="😊" style="-fx-font-size: 32px;"/>
+                                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                                    <Label text="Facial Recognition Enrollment" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                                    <Label text="Use biometric data for faster login. Requires a compatible webcam." style="-fx-font-size: 12px; -fx-text-fill: #6B7280;" wrapText="true"/>
+                                    <HBox spacing="5" alignment="CENTER_LEFT">
+                                        <VBox.margin>
+                                            <Insets top="5"/>
+                                        </VBox.margin>
+                                        <Label text="●" style="-fx-text-fill: #9CA3AF; -fx-font-size: 16px;"/>
+                                        <Label text="Disabled" style="-fx-text-fill: #6B7280; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                                    </HBox>
+                                </VBox>
+                                <Button text="Setup Now" styleClass="btn, btn-secondary" prefWidth="110"/>
+                            </HBox>
+                        </VBox>
+                        
+                        <!-- Recent Activity Card -->
+                        <VBox styleClass="card" spacing="20">
+                            <Label text="Recent Security Activity" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                            
+                            <TableView fx:id="loginHistoryTable" prefHeight="200">
+                                <columns>
+                                    <TableColumn fx:id="actionColumn" text="ACTION" prefWidth="120"/>
+                                    <TableColumn fx:id="deviceColumn" text="DEVICE" prefWidth="200"/>
+                                    <TableColumn fx:id="dateColumn" text="DATE" prefWidth="180"/>
+                                </columns>
+                            </TableView>
+                        </VBox>
+                        
+                    </VBox>
+                    
+                </HBox>
+                
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

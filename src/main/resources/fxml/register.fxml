@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.nexora.controllers.RegisterController"
+            prefWidth="1200" prefHeight="800">
+
+    <!-- Left Sidebar - Steps Progress -->
+    <left>
+        <VBox styleClass="sidebar" prefWidth="280" spacing="20" alignment="TOP_LEFT">
+            <padding>
+                <Insets top="40" right="20" bottom="40" left="20"/>
+            </padding>
+            
+            <!-- Logo & Brand -->
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <VBox.margin>
+                    <Insets bottom="40"/>
+                </VBox.margin>
+                <Label text="🔷" style="-fx-font-size: 32px; -fx-text-fill: #2DD4BF;"/>
+                <Label text="NEXORA" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+            </HBox>
+            
+            <!-- Step 1 -->
+            <VBox spacing="8" fx:id="step1Box" styleClass="sidebar-step, active">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label fx:id="step1Number" text="1" 
+                           style="-fx-background-color: #2DD4BF; -fx-background-radius: 50%; -fx-text-fill: white; -fx-min-width: 30px; -fx-min-height: 30px; -fx-alignment: center; -fx-font-weight: bold;"/>
+                    <VBox>
+                        <Label text="Account Setup" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px;"/>
+                        <Label text="Credentials &amp; Preferences" style="-fx-text-fill: rgba(255,255,255,0.6); -fx-font-size: 11px;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+            
+            <!-- Step 2 -->
+            <VBox spacing="8" fx:id="step2Box" styleClass="sidebar-step">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label fx:id="step2Number" text="2" 
+                           style="-fx-background-color: rgba(255,255,255,0.2); -fx-background-radius: 50%; -fx-text-fill: white; -fx-min-width: 30px; -fx-min-height: 30px; -fx-alignment: center;"/>
+                    <VBox>
+                        <Label text="Personal Information" style="-fx-text-fill: rgba(255,255,255,0.6); -fx-font-size: 14px;"/>
+                        <Label text="In Progress" style="-fx-text-fill: rgba(255,255,255,0.4); -fx-font-size: 11px;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+            
+            <!-- Step 3 -->
+            <VBox spacing="8" fx:id="step3Box" styleClass="sidebar-step">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label fx:id="step3Number" text="3" 
+                           style="-fx-background-color: rgba(255,255,255,0.2); -fx-background-radius: 50%; -fx-text-fill: white; -fx-min-width: 30px; -fx-min-height: 30px; -fx-alignment: center;"/>
+                    <VBox>
+                        <Label text="Identity Verification" style="-fx-text-fill: rgba(255,255,255,0.6); -fx-font-size: 14px;"/>
+                        <Label text="KYC Requirements" style="-fx-text-fill: rgba(255,255,255,0.4); -fx-font-size: 11px;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+            
+            <!-- Step 4 -->
+            <VBox spacing="8" fx:id="step4Box" styleClass="sidebar-step">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label fx:id="step4Number" text="4" 
+                           style="-fx-background-color: rgba(255,255,255,0.2); -fx-background-radius: 50%; -fx-text-fill: white; -fx-min-width: 30px; -fx-min-height: 30px; -fx-alignment: center;"/>
+                    <VBox>
+                        <Label text="Security Settings" style="-fx-text-fill: rgba(255,255,255,0.6); -fx-font-size: 14px;"/>
+                        <Label text="2FA &amp; Recovery" style="-fx-text-fill: rgba(255,255,255,0.4); -fx-font-size: 11px;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+            
+            <!-- Spacer -->
+            <Region VBox.vgrow="ALWAYS"/>
+            
+            <!-- Security Info -->
+            <VBox alignment="CENTER" spacing="5" style="-fx-padding: 20px; -fx-background-color: rgba(255,255,255,0.05); -fx-background-radius: 8px;">
+                <Label text="🔒" style="-fx-font-size: 16px;"/>
+                <Label text="Your data is encrypted using" style="-fx-text-fill: rgba(255,255,255,0.7); -fx-font-size: 10px;" textAlignment="CENTER"/>
+                <Label text="256-bit SSL protection." style="-fx-text-fill: rgba(255,255,255,0.7); -fx-font-size: 10px;" textAlignment="CENTER"/>
+            </VBox>
+            
+        </VBox>
+    </left>
+
+    <!-- Main Content Area -->
+    <center>
+        <StackPane styleClass="light-background">
+            <VBox alignment="CENTER" spacing="30" style="-fx-padding: 60px;">
+                
+                <!-- Content Container -->
+                <VBox fx:id="contentContainer" spacing="25" alignment="CENTER" maxWidth="600">
+                    <!-- Dynamic content will be loaded here based on current step -->
+                </VBox>
+                
+            </VBox>
+        </StackPane>
+    </center>
+
+</BorderPane>
