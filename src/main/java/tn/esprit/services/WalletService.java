@@ -32,7 +32,8 @@ public class WalletService {
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, walletId);
             ResultSet rs = ps.executeQuery();
-            if (rs.next()) return map(rs);
+            if (rs.next())
+                return map(rs);
             return null;
         } catch (SQLException e) {
             throw new RuntimeException("Erreur findById: " + e.getMessage(), e);
@@ -43,8 +44,9 @@ public class WalletService {
         List<Wallet> list = new ArrayList<>();
         String sql = "SELECT * FROM wallet ORDER BY wallet_id DESC";
         try (Statement st = conn.createStatement();
-             ResultSet rs = st.executeQuery(sql)) {
-            while (rs.next()) list.add(map(rs));
+                ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next())
+                list.add(map(rs));
         } catch (SQLException e) {
             throw new RuntimeException("Erreur getAll wallets: " + e.getMessage(), e);
         }
@@ -52,6 +54,10 @@ public class WalletService {
     }
 
     public void delete(long walletId) {
+        // Cascade delete: remove Reference IDs then Transactions first
+        TransactionService txService = new TransactionService();
+        txService.deleteByWallet(walletId);
+
         String sql = "DELETE FROM wallet WHERE wallet_id = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, walletId);

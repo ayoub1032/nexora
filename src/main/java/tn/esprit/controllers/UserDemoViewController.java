@@ -18,25 +18,43 @@ import java.sql.Timestamp;
 
 public class UserDemoViewController {
 
-    @FXML private TextField tfWalletId;
-    @FXML private Label lblInfo;
+    @FXML
+    private TextField tfWalletId;
+    @FXML
+    private TextField tfUpdateBalance;
+    @FXML
+    private Label lblInfo;
 
-    @FXML private Label lblWallet;
-    @FXML private Label lblBalance;
-    @FXML private Label lblReserved;
+    @FXML
+    private Label lblWallet;
+    @FXML
+    private Label lblBalance;
+    @FXML
+    private Label lblReserved;
 
-    @FXML private ComboBox<String> cbType;
-    @FXML private TextField tfAmount;
-    @FXML private TextField tfRef;
-    @FXML private Label lblOpMsg;
+    @FXML
+    private ComboBox<String> cbType;
+    @FXML
+    private TextField tfAmount;
+    @FXML
+    private TextField tfRef;
+    @FXML
+    private Label lblOpMsg;
 
-    @FXML private TableView<Transaction> txTable;
-    @FXML private TableColumn<Transaction, Long> colTxId;
-    @FXML private TableColumn<Transaction, BigDecimal> colTxAmount;
-    @FXML private TableColumn<Transaction, String> colTxType;
-    @FXML private TableColumn<Transaction, Long> colTxRef;
-    @FXML private TableColumn<Transaction, String> colTxStatus;
-    @FXML private TableColumn<Transaction, Timestamp> colTxCreated;
+    @FXML
+    private TableView<Transaction> txTable;
+    @FXML
+    private TableColumn<Transaction, Long> colTxId;
+    @FXML
+    private TableColumn<Transaction, BigDecimal> colTxAmount;
+    @FXML
+    private TableColumn<Transaction, String> colTxType;
+    @FXML
+    private TableColumn<Transaction, Long> colTxRef;
+    @FXML
+    private TableColumn<Transaction, String> colTxStatus;
+    @FXML
+    private TableColumn<Transaction, Timestamp> colTxCreated;
 
     private final WalletService walletService = new WalletService();
     private final TransactionService txService = new TransactionService();
@@ -48,6 +66,7 @@ public class UserDemoViewController {
         tfWalletId.setTextFormatter(ValidationUtil.numericLongFormatter());
         tfRef.setTextFormatter(ValidationUtil.numericLongFormatter());
         tfAmount.setTextFormatter(ValidationUtil.positiveDecimalFormatter());
+        tfUpdateBalance.setTextFormatter(ValidationUtil.positiveDecimalFormatter());
 
         cbType.getItems().addAll("DEPOSIT", "WITHDRAW");
         cbType.getSelectionModel().selectFirst();
@@ -161,8 +180,53 @@ public class UserDemoViewController {
 
         } catch (Exception e) {
             String msg = e.getMessage();
-            if (msg == null) msg = "Erreur inconnue.";
+            if (msg == null)
+                msg = "Erreur inconnue.";
             lblOpMsg.setText("❌ " + msg);
+        }
+    }
+
+    @FXML
+    public void updateWallet() {
+        lblOpMsg.setText("");
+
+        Long walletId = UserContext.getWalletId();
+        if (walletId == null) {
+            lblOpMsg.setText("⚠️ Charge un wallet d'abord.");
+            return;
+        }
+
+        if (ValidationUtil.isBlank(tfUpdateBalance.getText())) {
+            lblOpMsg.setText("⚠️ Nouveau solde obligatoire.");
+            return;
+        }
+
+        try {
+            BigDecimal newBalance = new BigDecimal(tfUpdateBalance.getText().trim());
+            walletService.updateBalance(walletId, newBalance);
+            lblOpMsg.setText("✅ Solde mis à jour.");
+            tfUpdateBalance.clear();
+            refreshAll();
+        } catch (Exception e) {
+            lblOpMsg.setText("❌ Erreur mise à jour: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void deleteTransaction() {
+        lblOpMsg.setText("");
+        Transaction selectedTx = txTable.getSelectionModel().getSelectedItem();
+        if (selectedTx == null) {
+            lblOpMsg.setText("⚠️ Sélectionne une transaction à supprimer.");
+            return;
+        }
+
+        try {
+            txService.delete(selectedTx.getTransactionId());
+            lblOpMsg.setText("✅ Transaction supprimée.");
+            refreshAll();
+        } catch (Exception e) {
+            lblOpMsg.setText("❌ Erreur suppression: " + e.getMessage());
         }
     }
 

@@ -45,8 +45,8 @@ public class TransactionService {
     }
 
     private void executeAtomic(long walletId, BigDecimal amount, Long referenceId,
-                               String selectForUpdate, String updateWallet, String insertTx,
-                               boolean isDeposit) {
+            String selectForUpdate, String updateWallet, String insertTx,
+            boolean isDeposit) {
         try {
             conn.setAutoCommit(false);
 
@@ -54,7 +54,8 @@ public class TransactionService {
             try (PreparedStatement ps = conn.prepareStatement(selectForUpdate)) {
                 ps.setLong(1, walletId);
                 ResultSet rs = ps.executeQuery();
-                if (!rs.next()) throw new RuntimeException("Wallet introuvable (wallet_id=" + walletId + ")");
+                if (!rs.next())
+                    throw new RuntimeException("Wallet introuvable (wallet_id=" + walletId + ")");
                 balance = rs.getBigDecimal("balance");
             }
 
@@ -71,18 +72,26 @@ public class TransactionService {
             try (PreparedStatement ps = conn.prepareStatement(insertTx)) {
                 ps.setLong(1, walletId);
                 ps.setBigDecimal(2, amount);
-                if (referenceId == null) ps.setNull(3, Types.BIGINT);
-                else ps.setLong(3, referenceId);
+                if (referenceId == null)
+                    ps.setNull(3, Types.BIGINT);
+                else
+                    ps.setLong(3, referenceId);
                 ps.executeUpdate();
             }
 
             conn.commit();
 
         } catch (Exception e) {
-            try { conn.rollback(); } catch (SQLException ignored) {}
+            try {
+                conn.rollback();
+            } catch (SQLException ignored) {
+            }
             throw new RuntimeException("Erreur " + (isDeposit ? "deposit" : "withdraw") + ": " + e.getMessage(), e);
         } finally {
-            try { conn.setAutoCommit(true); } catch (SQLException ignored) {}
+            try {
+                conn.setAutoCommit(true);
+            } catch (SQLException ignored) {
+            }
         }
     }
 
@@ -90,8 +99,9 @@ public class TransactionService {
         List<Transaction> list = new ArrayList<>();
         String sql = "SELECT * FROM `transaction` ORDER BY created_at DESC";
         try (Statement st = conn.createStatement();
-             ResultSet rs = st.executeQuery(sql)) {
-            while (rs.next()) list.add(map(rs));
+                ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next())
+                list.add(map(rs));
         } catch (SQLException e) {
             throw new RuntimeException("Erreur getAll transactions: " + e.getMessage(), e);
         }
@@ -104,7 +114,8 @@ public class TransactionService {
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, walletId);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) list.add(map(rs));
+            while (rs.next())
+                list.add(map(rs));
         } catch (SQLException e) {
             throw new RuntimeException("Erreur getByWallet: " + e.getMessage(), e);
         }
@@ -133,10 +144,13 @@ public class TransactionService {
     }
 
     // ✅ compatibilité si tu gardes des anciens controllers
-    public List<Transaction> findByWallet(long walletId) { return getByWallet(walletId); }
+    public List<Transaction> findByWallet(long walletId) {
+        return getByWallet(walletId);
+    }
 
     public void updateStatus(long transactionId, String status) {
-        if (status == null) throw new RuntimeException("Status null.");
+        if (status == null)
+            throw new RuntimeException("Status null.");
         status = status.toUpperCase().trim();
         if (!status.equals("CONFIRMED") && !status.equals("CANCELED")) {
             throw new RuntimeException("Status invalide (CONFIRMED/CANCELED).");
@@ -152,12 +166,73 @@ public class TransactionService {
     }
 
     public void delete(long transactionId) {
+        // First delete any transactions that reference this one (e.g. transfers)
+        String sqlDependencies = "DELETE FROM `transaction` WHERE reference_id = ?";
         String sql = "DELETE FROM `transaction` WHERE transaction_id = ?";
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setLong(1, transactionId);
-            ps.executeUpdate();
+
+        try {
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement ps = conn.prepareStatement(sqlDependencies)) {
+                ps.setLong(1, transactionId);
+                ps.executeUpdate();
+            }
+
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setLong(1, transactionId);
+                ps.executeUpdate();
+            }
+
+            conn.commit();
         } catch (SQLException e) {
-            throw new RuntimeException("Erreur delete transaction: " + e.getMessage(), e);
+            try {
+                conn.rollback();
+            } catch (SQLException ignored) {
+            }
+            throw new RuntimeException("Erreur delete transaction (et dépendances): " + e.getMessage(), e);
+        } finally {
+            try {
+                conn.setAutoCommit(true);
+            } catch (SQLException ignored) {
+            }
+        }
+    }
+
+    public void deleteByWallet(long walletId) {
+        // 1. Delete transactions referencing any transaction of this wallet
+        // MySQL trick: You can't delete from T where id in (select id from T). Need a
+        // temp table alias.
+        String sqlRefs = "DELETE FROM `transaction` WHERE reference_id IN " +
+                "(SELECT transaction_id FROM (SELECT transaction_id FROM `transaction` WHERE wallet_id = ?) AS tmp)";
+
+        // 2. Delete transactions of this wallet
+        String sqlWalletTxs = "DELETE FROM `transaction` WHERE wallet_id = ?";
+
+        try {
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement ps = conn.prepareStatement(sqlRefs)) {
+                ps.setLong(1, walletId);
+                ps.executeUpdate();
+            }
+
+            try (PreparedStatement ps = conn.prepareStatement(sqlWalletTxs)) {
+                ps.setLong(1, walletId);
+                ps.executeUpdate();
+            }
+
+            conn.commit();
+        } catch (SQLException e) {
+            try {
+                conn.rollback();
+            } catch (SQLException ignored) {
+            }
+            throw new RuntimeException("Erreur deleteByWallet: " + e.getMessage(), e);
+        } finally {
+            try {
+                conn.setAutoCommit(true);
+            } catch (SQLException ignored) {
+            }
         }
     }
 }

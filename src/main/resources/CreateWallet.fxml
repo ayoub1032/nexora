@@ -8,16 +8,20 @@
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="tn.esprit.controllers.CreateWalletController"
       spacing="12"
-      styleClass="page">
+      styleClass="admin-page">
 
     <padding>
         <Insets top="16" right="16" bottom="16" left="16"/>
     </padding>
 
-    <Label text="Créer un Wallet" styleClass="titleSmall"/>
-    <Label text="Balance et reserved seront à 0 automatiquement" styleClass="subtitle"/>
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="N" styleClass="brand-badge"/>
+        <Label text="Create Wallet" styleClass="page-title"/>
+    </HBox>
 
-    <VBox spacing="10" styleClass="card">
+    <Label text="Balance et reserved seront à 0 automatiquement." styleClass="page-subtitle"/>
+
+    <VBox spacing="10" styleClass="card-light">
         <padding><Insets top="12" right="12" bottom="12" left="12"/></padding>
 
         <GridPane hgap="10" vgap="10">
@@ -26,22 +30,22 @@
                 <ColumnConstraints percentWidth="65"/>
             </columnConstraints>
 
-            <Label text="User ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-            <TextField fx:id="tfUserId" promptText="ex: 1" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+            <Label text="User ID:" styleClass="small-label" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="tfUserId" promptText="ex: 1" styleClass="input-light" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-            <Label text="Balance:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-            <TextField fx:id="tfBalance" text="0" editable="false" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            <Label text="Balance:" styleClass="small-label" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="tfBalance" text="0" editable="false" styleClass="input-light" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-            <Label text="Reserved:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-            <TextField fx:id="tfReserved" text="0" editable="false" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            <Label text="Reserved:" styleClass="small-label" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="tfReserved" text="0" editable="false" styleClass="input-light" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
         </GridPane>
 
-        <Label fx:id="lblMsg" text="" styleClass="hint"/>
+        <Label fx:id="lblMsg" text="" styleClass="note"/>
     </VBox>
 
     <HBox spacing="10" alignment="CENTER_RIGHT">
-        <Button text="Annuler" onAction="#cancel" styleClass="secondary"/>
-        <Button text="Créer" onAction="#create" styleClass="primary"/>
+        <Button text="Cancel" onAction="#cancel" styleClass="btn-ghost"/>
+        <Button text="Create" onAction="#create" styleClass="btn-primary"/>
     </HBox>
 
 </VBox>
