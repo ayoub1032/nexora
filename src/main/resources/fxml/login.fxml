@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="tn.nexora.controllers.LoginController"
+           styleClass="dark-background"
+           prefWidth="1024" prefHeight="768">
+
+    <!-- Main Container -->
+    <VBox alignment="CENTER" spacing="0">
+        
+        <!-- Login Card -->
+        <VBox styleClass="card" alignment="CENTER" spacing="20" 
+              prefWidth="400" maxWidth="400">
+            
+            <!-- Logo Icon (Unicode placeholder) -->
+            <Label text="🔷" style="-fx-font-size: 48px; -fx-text-fill: #14B8A6;">
+                <VBox.margin>
+                    <Insets top="10"/>
+                </VBox.margin>
+            </Label>
+            
+            <!-- Brand Name -->
+            <Label text="NEXORA" styleClass="card-header">
+                <font>
+                    <Font name="System Bold" size="28"/>
+                </font>
+            </Label>
+            
+            <!-- Welcome Text -->
+            <Label text="Welcome Back" styleClass="label-title">
+                <font>
+                    <Font name="System Bold" size="24"/>
+                </font>
+                <VBox.margin>
+                    <Insets top="10"/>
+                </VBox.margin>
+            </Label>
+            
+            <Label text="Access your secure trading portfolio" styleClass="card-subtitle">
+                <VBox.margin>
+                    <Insets bottom="20"/>
+                </VBox.margin>
+            </Label>
+            
+            <!-- Email Field -->
+            <VBox spacing="8" prefWidth="320">
+                <Label text="EMAIL ADDRESS" styleClass="field-label"/>
+                <HBox styleClass="input-field" spacing="8" alignment="CENTER_LEFT">
+                    <Label text="✉" style="-fx-text-fill: #6B7280; -fx-font-size: 14px;"/>
+                    <TextField fx:id="emailField" 
+                              promptText="name@example.com"
+                              style="-fx-background-color: transparent; -fx-border-width: 0; -fx-padding: 0;"
+                              prefWidth="280"/>
+                </HBox>
+                <Label fx:id="emailError" styleClass="error-label" visible="false"/>
+            </VBox>
+            
+            <!-- Password Field -->
+            <VBox spacing="8" prefWidth="320">
+                <HBox>
+                    <Label text="PASSWORD" styleClass="field-label" HBox.hgrow="ALWAYS"/>
+                    <Hyperlink fx:id="forgotPasswordLink" text="Forgot Password?" 
+                              styleClass="hyperlink" 
+                              style="-fx-font-size: 11px;"
+                              onAction="#handleForgotPassword"/>
+                </HBox>
+                <HBox styleClass="password-field" spacing="8" alignment="CENTER_LEFT">
+                    <Label text="🔒" style="-fx-text-fill: #6B7280; -fx-font-size: 14px;"/>
+                    <PasswordField fx:id="passwordField" 
+                                  promptText="••••••••"
+                                  style="-fx-background-color: transparent; -fx-border-width: 0; -fx-padding: 0;"
+                                  prefWidth="260"/>
+                    <Label text="👁" style="-fx-text-fill: #6B7280; -fx-font-size: 14px; -fx-cursor: hand;"/>
+                </HBox>
+                <Label fx:id="passwordError" styleClass="error-label" visible="false"/>
+            </VBox>
+            
+            <!-- General Error Message -->
+            <Label fx:id="errorMessage" styleClass="error-label" visible="false" wrapText="true" 
+                   prefWidth="320" textAlignment="CENTER"/>
+            
+            <!-- Login Button -->
+            <Button fx:id="loginButton" text="🔐 Log In" 
+                   styleClass="btn, btn-primary" 
+                   prefWidth="320" prefHeight="45"
+                   onAction="#handleLogin">
+                <VBox.margin>
+                    <Insets top="10"/>
+                </VBox.margin>
+            </Button>
+            
+            <!-- Divider with OR -->
+            <HBox alignment="CENTER" spacing="10" prefWidth="320">
+                <VBox.margin>
+                    <Insets top="10" bottom="10"/>
+                </VBox.margin>
+                <VBox styleClass="divider" HBox.hgrow="ALWAYS"/>
+                <Label text="OR" styleClass="divider-text"/>
+                <VBox styleClass="divider" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            
+            <!-- Face ID Login Button -->
+            <Button fx:id="faceIdButton" text="😊 Log in with Face ID" 
+                   styleClass="btn, btn-secondary" 
+                   prefWidth="320" prefHeight="45"
+                   onAction="#handleFaceIdLogin"/>
+            
+            <!-- Sign Up Link -->
+            <HBox alignment="CENTER" spacing="5">
+                <VBox.margin>
+                    <Insets top="20"/>
+                </VBox.margin>
+                <Label text="Don't have an account?" style="-fx-text-fill: #6B7280; -fx-font-size: 13px;"/>
+                <Hyperlink fx:id="signUpLink" text="Sign Up" 
+                          styleClass="hyperlink" 
+                          style="-fx-font-size: 13px; -fx-font-weight: bold;"
+                          onAction="#handleSignUp"/>
+            </HBox>
+            
+            <!-- Security Badge -->
+            <HBox alignment="CENTER" spacing="5" styleClass="security-badge">
+                <VBox.margin>
+                    <Insets top="20" bottom="10"/>
+                </VBox.margin>
+                <Label text="🔒" style="-fx-font-size: 11px;"/>
+                <Label text="256-bit SSL Encrypted" style="-fx-text-fill: #9CA3AF; -fx-font-size: 11px;"/>
+            </HBox>
+            
+        </VBox>
+        
+        <!-- Need Assistance Link -->
+        <HBox alignment="CENTER" spacing="5" style="-fx-padding: 20px;">
+            <Label text="❓" style="-fx-font-size: 12px;"/>
+            <Hyperlink text="Need assistance?" 
+                      styleClass="hyperlink"
+                      style="-fx-text-fill: rgba(255,255,255,0.7); -fx-font-size: 12px;"
+                      onAction="#handleNeedAssistance"/>
+        </HBox>
+        
+    </VBox>
+    
+</StackPane>
