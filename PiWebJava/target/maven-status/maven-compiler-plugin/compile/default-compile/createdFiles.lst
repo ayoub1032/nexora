@@ -1,0 +1,15 @@
+tn\esprit\entities\Portfolio.class
+tn\esprit\services\PortfolioService.class
+tn\esprit\controllers\AssetViewController.class
+tn\esprit\mains\FxMain.class
+tn\esprit\services\AssetService.class
+tn\esprit\controllers\PortfolioViewController.class
+tn\esprit\utils\DBConnection.class
+tn\esprit\utils\UserContext.class
+tn\esprit\controllers\RoleSelectionController.class
+tn\esprit\entities\Order.class
+tn\esprit\controllers\OrderViewController.class
+tn\esprit\utils\SceneNavigator.class
+tn\esprit\utils\ValidationUtil.class
+tn\esprit\entities\Asset.class
+tn\esprit\services\OrderService.class
