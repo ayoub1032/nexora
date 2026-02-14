@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.AdminViewController"
+            style="-fx-background-color: #f5f7fb;">
+
+    <!-- TOP NAVBAR -->
+    <top>
+        <HBox spacing="14" alignment="CENTER_LEFT" style="-fx-background-color: #ffffff; -fx-border-color: rgba(15, 23, 42, 0.10); -fx-border-width: 0 0 1 0;">
+            <padding>
+                <Insets top="12" right="16" bottom="12" left="16"/>
+            </padding>
+
+            <!-- Brand -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="N" style="-fx-background-color: rgba(16, 185, 129, 0.18); -fx-text-fill: #0ea5a5; -fx-font-weight: 900; -fx-padding: 6 10 6 10; -fx-background-radius: 10;"/>
+                <Label text="NEXORA" style="-fx-text-fill: #0f172a; -fx-font-size: 14px; -fx-font-weight: 900; -fx-letter-spacing: 1px;"/>
+            </HBox>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <!-- Back Button -->
+            <Button text="Logout" onAction="#back" styleClass="btn-ghost"/>
+        </HBox>
+    </top>
+
+    <!-- CONTENT WITH TABS -->
+    <center>
+        <TabPane style="-fx-background-color: #f5f7fb;">
+            <tabs>
+                <!-- ASSETS TAB -->
+                <Tab text="📊 Assets Management" closable="false">
+                    <BorderPane style="-fx-background-color: #f5f7fb;">
+                        <center>
+                            <VBox spacing="16" style="-fx-padding: 16px;">
+                                <Label text="Assets Management" styleClass="title"/>
+                                
+                                <!-- Assets Table -->
+                                <VBox spacing="8" VBox.vgrow="ALWAYS">
+                                    <Label text="All Assets" styleClass="page-title" style="-fx-font-size: 14px;"/>
+                                    <TableView fx:id="assetsTable" styleClass="table-view" VBox.vgrow="ALWAYS" style="-fx-min-height: 250px;">
+                                        <columns>
+                                            <TableColumn fx:id="colAssetId" text="ID" prefWidth="40"/>
+                                            <TableColumn fx:id="colAssetName" text="Name" prefWidth="100"/>
+                                            <TableColumn fx:id="colAssetSymbol" text="Symbol" prefWidth="70"/>
+                                            <TableColumn fx:id="colAssetValue" text="Value" prefWidth="80"/>
+                                            <TableColumn fx:id="colAssetType" text="Type" prefWidth="80"/>
+                                        </columns>
+                                    </TableView>
+                                </VBox>
+
+                                <!-- Asset Form -->
+                                <VBox spacing="10" styleClass="form-container" style="-fx-padding: 16px;">
+                                    <Label text="Asset Form" styleClass="page-title" style="-fx-font-size: 14px;"/>
+                                    
+                                    <GridPane hgap="10" vgap="10">
+                                        <columnConstraints>
+                                            <ColumnConstraints prefWidth="100"/>
+                                            <ColumnConstraints hgrow="ALWAYS"/>
+                                        </columnConstraints>
+                                        
+                                        <Label text="ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="small-label"/>
+                                        <TextField fx:id="tfAssetId" promptText="Auto-generated" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                                        <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="small-label"/>
+                                        <TextField fx:id="tfAssetName" promptText="Asset name" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                                        <Label text="Symbol:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="small-label"/>
+                                        <TextField fx:id="tfAssetSymbol" promptText="BTC, ETH, etc." GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                                        <Label text="Value:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="small-label"/>
+                                        <TextField fx:id="tfAssetValue" promptText="0.00" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                                        <Label text="Type:" GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="small-label"/>
+                                        <TextField fx:id="tfAssetType" promptText="Crypto, Stock, etc." GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+                                        <Label fx:id="lblAssetMsg" text="" style="-fx-text-fill: #ef4444; -fx-font-weight: 700; -fx-font-size: 11px;" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5"/>
+
+                                        <HBox spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="6">
+                                            <Button onAction="#createAsset" text="✚ Create" styleClass="btn-primary"/>
+                                            <Button onAction="#updateAsset" text="✏️ Update" styleClass="btn-primary"/>
+                                            <Button onAction="#deleteAsset" text="🗑️ Delete" styleClass="btn-danger"/>
+                                            <Button onAction="#clearAssetForm" text="Clear" styleClass="btn-ghost"/>
+                                        </HBox>
+                                    </GridPane>
+                                </VBox>
+                            </VBox>
+                        </center>
+                    </BorderPane>
+                </Tab>
+
+                <!-- ORDERS TAB -->
+                <Tab text="📈 Orders Management" closable="false">
+                    <BorderPane style="-fx-background-color: #f5f7fb;">
+                        <center>
+                            <VBox spacing="16" style="-fx-padding: 16px;">
+                                <Label text="Orders Management" styleClass="title"/>
+                                
+                                <!-- Orders Table -->
+                                <VBox spacing="8" VBox.vgrow="ALWAYS">
+                                    <Label text="All Orders" styleClass="page-title" style="-fx-font-size: 14px;"/>
+                                    <TableView fx:id="ordersTable" styleClass="table-view" VBox.vgrow="ALWAYS" style="-fx-min-height: 250px;">
+                                        <columns>
+                                            <TableColumn fx:id="colOrderId" text="ID" prefWidth="40"/>
+                                            <TableColumn fx:id="colOrderAssetId" text="Asset ID" prefWidth="60"/>
+                                            <TableColumn fx:id="colOrderUserId" text="User ID" prefWidth="60"/>
+                                            <TableColumn fx:id="colOrderQuantity" text="Qty" prefWidth="50"/>
+                                            <TableColumn fx:id="colOrderPrice" text="Price" prefWidth="70"/>
+                                            <TableColumn fx:id="colOrderType" text="Type" prefWidth="60"/>
+                                        </columns>
+                                    </TableView>
+                                </VBox>
+
+                                <!-- Order Form -->
+                                <VBox spacing="10" styleClass="form-container" style="-fx-padding: 16px;">
+                                    <Label text="Order Form" styleClass="page-title" style="-fx-font-size: 14px;"/>
+                                    
+                                    <GridPane hgap="10" vgap="10">
+                                        <columnConstraints>
+                                            <ColumnConstraints prefWidth="100"/>
+                                            <ColumnConstraints hgrow="ALWAYS"/>
+                                        </columnConstraints>
+                                        
+                                        <Label text="ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="small-label"/>
+                                        <TextField fx:id="tfOrderId" promptText="Auto-generated" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                                        <Label text="Asset:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="small-label"/>
+                                        <ComboBox fx:id="cbOrderAsset" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                                        <Label text="User ID:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="small-label"/>
+                                        <TextField fx:id="tfOrderUserId" promptText="User ID" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                                        <Label text="Quantity:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="small-label"/>
+                                        <TextField fx:id="tfOrderQuantity" promptText="0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                                        <Label text="Price (auto):" GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="small-label"/>
+                                        <TextField fx:id="tfOrderPrice" promptText="Auto-filled" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+                                        <Label text="Type:" GridPane.columnIndex="0" GridPane.rowIndex="5" styleClass="small-label"/>
+                                        <ComboBox fx:id="cbOrderType" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+                                        <Label fx:id="lblOrderMsg" text="" style="-fx-text-fill: #ef4444; -fx-font-weight: 700; -fx-font-size: 11px;" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="6"/>
+
+                                        <HBox spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7">
+                                            <Button onAction="#createOrder" text="✚ Create" styleClass="btn-primary"/>
+                                            <Button onAction="#updateOrder" text="✏️ Update" styleClass="btn-primary"/>
+                                            <Button onAction="#deleteOrder" text="🗑️ Delete" styleClass="btn-danger"/>
+                                            <Button onAction="#clearOrderForm" text="Clear" styleClass="btn-ghost"/>
+                                        </HBox>
+                                    </GridPane>
+                                </VBox>
+                            </VBox>
+                        </center>
+                    </BorderPane>
+                </Tab>
+
+                <!-- PORTFOLIOS TAB -->
+                <Tab text="💼 Portfolios Management" closable="false">
+                    <BorderPane style="-fx-background-color: #f5f7fb;">
+                        <center>
+                            <VBox spacing="16" style="-fx-padding: 16px;">
+                                <Label text="Portfolios Management" styleClass="title"/>
+                                
+                                <!-- Portfolios Table -->
+                                <VBox spacing="8" VBox.vgrow="ALWAYS">
+                                    <Label text="All Portfolios" styleClass="page-title" style="-fx-font-size: 14px;"/>
+                                    <TableView fx:id="portfoliosTable" styleClass="table-view" VBox.vgrow="ALWAYS" style="-fx-min-height: 250px;">
+                                        <columns>
+                                            <TableColumn fx:id="colPortfolioId" text="ID" prefWidth="50"/>
+                                            <TableColumn fx:id="colPortfolioUserId" text="User ID" prefWidth="80"/>
+                                            <TableColumn fx:id="colPortfolioValue" text="Total Value" prefWidth="100"/>
+                                        </columns>
+                                    </TableView>
+                                </VBox>
+
+                                <!-- Portfolio Form -->
+                                <VBox spacing="10" styleClass="form-container" style="-fx-padding: 16px;">
+                                    <Label text="Portfolio Form" styleClass="page-title" style="-fx-font-size: 14px;"/>
+                                    
+                                    <GridPane hgap="10" vgap="10">
+                                        <columnConstraints>
+                                            <ColumnConstraints prefWidth="100"/>
+                                            <ColumnConstraints hgrow="ALWAYS"/>
+                                        </columnConstraints>
+                                        
+                                        <Label text="ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="small-label"/>
+                                        <TextField fx:id="tfPortfolioId" promptText="Auto-generated" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                                        <Label text="User ID:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="small-label"/>
+                                        <TextField fx:id="tfPortfolioUserId" promptText="User ID" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                                        <Label text="Total Value:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="small-label"/>
+                                        <TextField fx:id="tfPortfolioValue" promptText="0.00" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                                        <Label fx:id="lblPortfolioMsg" text="" style="-fx-text-fill: #ef4444; -fx-font-weight: 700; -fx-font-size: 11px;" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
+
+                                        <HBox spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                                            <Button onAction="#createPortfolio" text="✚ Create" styleClass="btn-primary"/>
+                                            <Button onAction="#updatePortfolio" text="✏️ Update" styleClass="btn-primary"/>
+                                            <Button onAction="#deletePortfolio" text="🗑️ Delete" styleClass="btn-danger"/>
+                                            <Button onAction="#clearPortfolioForm" text="Clear" styleClass="btn-ghost"/>
+                                        </HBox>
+                                    </GridPane>
+                                </VBox>
+                            </VBox>
+                        </center>
+                    </BorderPane>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+
+</BorderPane>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.RoleSelectionController">
+
+    <center>
+        <VBox spacing="20" alignment="CENTER" style="-fx-padding: 20px;">
+            <VBox spacing="8" alignment="CENTER">
+                <Label text="NEXORA" styleClass="title" style="-fx-font-size: 32px;"/>
+                <Label text="Asset &amp; Portfolio Management" styleClass="subtitle" style="-fx-font-size: 16px;"/>
+            </VBox>
+
+            <Label text="Select your access level to continue:" styleClass="hint" style="-fx-font-size: 14px;"/>
+
+            <Separator/>
+
+            <VBox spacing="12" alignment="CENTER">
+                <Button onAction="#goAdmin" text="🔑 Admin Mode" styleClass="btn-primary" style="-fx-padding: 12px 40px; -fx-font-size: 14px;" minWidth="220"/>
+                <Button onAction="#goUser" text="👤 User Mode" styleClass="btn-primary" style="-fx-padding: 12px 40px; -fx-font-size: 14px;" minWidth="220"/>
+            </VBox>
+
+            <Separator/>
+
+            <Label text="Admin: Full management • User: View assets and create orders" styleClass="small-muted" style="-fx-font-size: 11px;"/>
+        </VBox>
+    </center>
+
+</BorderPane>

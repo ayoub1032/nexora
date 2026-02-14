@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.UserViewController"
+            style="-fx-background-color: #f5f7fb;">
+
+    <!-- TOP HEADER -->
+    <top>
+        <HBox spacing="14" alignment="CENTER_LEFT" styleClass="admin-topbar" style="-fx-background-color: #ffffff; -fx-padding: 12px 16px; -fx-border-color: rgba(15, 23, 42, 0.10); -fx-border-width: 0 0 1 0;">
+            <Label text="User Dashboard" styleClass="title" style="-fx-font-size: 20px;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Logout" onAction="#back" styleClass="btn-ghost"/>
+        </HBox>
+    </top>
+
+    <!-- MAIN CONTENT -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="admin-scroll">
+            <content>
+                <VBox spacing="16" styleClass="admin-content" style="-fx-padding: 16px;">
+
+                    <!-- PORTFOLIO CARD -->
+                    <VBox spacing="12" styleClass="card-light" style="-fx-padding: 16px; -fx-background-color: #ffffff; -fx-background-radius: 14; -fx-border-color: rgba(15, 23, 42, 0.10); -fx-border-width: 1; -fx-border-radius: 14;">
+                        <Label text="My Portfolio" styleClass="page-title"/>
+                        <HBox spacing="20">
+                            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                <Label text="Total Value" styleClass="small-label"/>
+                                <Label fx:id="lblPortfolioValue" text="0.00" style="-fx-text-fill: #0f172a; -fx-font-size: 28px; -fx-font-weight: 900;"/>
+                            </VBox>
+                            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                <Label text="Status" styleClass="small-label"/>
+                                <Label fx:id="lblPortfolioStatus" text="Active" styleClass="label-success"/>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+
+                    <!-- TWO COLUMN LAYOUT -->
+                    <GridPane hgap="16" vgap="16">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="50"/>
+                            <ColumnConstraints percentWidth="50"/>
+                        </columnConstraints>
+
+                        <!-- LEFT: AVAILABLE ASSETS -->
+                        <VBox spacing="12" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <Label text="Available Assets" styleClass="page-title"/>
+                            <TableView fx:id="assetsTable" styleClass="table-view" VBox.vgrow="ALWAYS" style="-fx-min-height: 300px;">
+                                <columns>
+                                    <TableColumn fx:id="colAssetId" text="ID" prefWidth="40"/>
+                                    <TableColumn fx:id="colAssetName" text="Name" prefWidth="80"/>
+                                    <TableColumn fx:id="colAssetSymbol" text="Symbol" prefWidth="60"/>
+                                    <TableColumn fx:id="colAssetValue" text="Value" prefWidth="70"/>
+                                </columns>
+                            </TableView>
+                        </VBox>
+
+                        <!-- RIGHT: CREATE ORDER -->
+                        <VBox spacing="12" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="card-light" style="-fx-padding: 16px; -fx-background-color: #ffffff; -fx-background-radius: 14; -fx-border-color: rgba(15, 23, 42, 0.10); -fx-border-width: 1; -fx-border-radius: 14;">
+                            <Label text="Create Order" styleClass="page-title"/>
+
+                            <VBox spacing="8">
+                                <Label text="Select Asset:" styleClass="small-label"/>
+                                <ComboBox fx:id="cbAsset" HBox.hgrow="ALWAYS" style="-fx-font-size: 11px; -fx-padding: 8px; -fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: rgba(15, 23, 42, 0.14); -fx-border-width: 1; -fx-text-fill: #0f172a;"/>
+                            </VBox>
+
+                            <VBox spacing="8">
+                                <Label text="Quantity:" styleClass="small-label"/>
+                                <TextField fx:id="tfQuantity" promptText="Enter quantity" style="-fx-font-size: 11px; -fx-padding: 8px; -fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: rgba(15, 23, 42, 0.14); -fx-border-width: 1; -fx-text-fill: #0f172a; -fx-prompt-text-fill: rgba(15, 23, 42, 0.45);"/>
+                            </VBox>
+
+                            <VBox spacing="8">
+                                <Label text="Total Price (auto):" styleClass="small-label"/>
+                                <TextField fx:id="tfPrice" promptText="Auto-calculated" disable="true" style="-fx-font-size: 11px; -fx-padding: 8px; -fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: rgba(15, 23, 42, 0.14); -fx-border-width: 1; -fx-text-fill: #0f172a; -fx-prompt-text-fill: rgba(15, 23, 42, 0.45);"/>
+                            </VBox>
+
+                            <VBox spacing="8">
+                                <Label text="Order Type:" styleClass="small-label"/>
+                                <ComboBox fx:id="cbOrderType" style="-fx-font-size: 11px; -fx-padding: 8px; -fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: rgba(15, 23, 42, 0.14); -fx-border-width: 1; -fx-text-fill: #0f172a;"/>
+                            </VBox>
+
+                            <Label fx:id="lblMsg" text="" style="-fx-text-fill: #ef4444; -fx-font-weight: 700; -fx-font-size: 11px; -fx-wrap-text: true;"/>
+
+                            <HBox spacing="10">
+                                <Button onAction="#createOrder" text="✓ Create Order" styleClass="btn-primary" HBox.hgrow="ALWAYS"/>
+                                <Button onAction="#clearFields" text="Clear" styleClass="btn-ghost" HBox.hgrow="ALWAYS"/>
+                            </HBox>
+                        </VBox>
+                    </GridPane>
+
+                    <!-- MY ORDERS -->
+                    <VBox spacing="12">
+                        <Label text="My Orders" styleClass="page-title"/>
+                        <TableView fx:id="ordersTable" styleClass="table-view" VBox.vgrow="ALWAYS" style="-fx-min-height: 250px;">
+                            <columns>
+                                <TableColumn fx:id="colOrderId" text="Order ID" prefWidth="50"/>
+                                <TableColumn fx:id="colOrderAssetId" text="Asset ID" prefWidth="60"/>
+                                <TableColumn fx:id="colOrderQuantity" text="Qty" prefWidth="50"/>
+                                <TableColumn fx:id="colOrderPrice" text="Price" prefWidth="70"/>
+                                <TableColumn fx:id="colOrderType" text="Type" prefWidth="50"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
