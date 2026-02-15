@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.PortfolioViewController">
+
+    <top>
+        <VBox spacing="10" styleClass="content-header">
+            <padding>
+                <Insets top="12" right="16" bottom="12" left="16"/>
+            </padding>
+            <Label text="Portfolios Management" styleClass="title"/>
+            <HBox spacing="10">
+                <TextField fx:id="tfFilterUserId" promptText="Filter by User ID..." HBox.hgrow="ALWAYS"/>
+                <Button onAction="#refreshPortfolios" text="🔄 Refresh" styleClass="btn-primary"/>
+                <Button onAction="#back" text="← Back" styleClass="btn-ghost"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true">
+            <VBox spacing="12" style="-fx-padding: 16px;">
+                <TableView fx:id="portfolioTable" styleClass="table-view" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colPortfolioId" text="ID" prefWidth="50"/>
+                        <TableColumn fx:id="colUserId" text="User ID" prefWidth="80"/>
+                        <TableColumn fx:id="colTotalValue" text="Total Value" prefWidth="100"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <VBox spacing="10" styleClass="form-container" style="-fx-margin: 16px;">
+            <GridPane hgap="10" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints prefWidth="100"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <Label text="User ID:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="tfUserId" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Total Value:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <TextField fx:id="tfTotalValue" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <Label fx:id="lblMsg" text="" styleClass="label-error" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2"/>
+
+                <HBox spacing="10" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                    <Button onAction="#addPortfolio" text="➕ Add" styleClass="btn-primary"/>
+                    <Button onAction="#updatePortfolio" text="✏️ Update" styleClass="btn-primary"/>
+                    <Button onAction="#deletePortfolio" text="🗑️ Delete" styleClass="btn-danger"/>
+                    <Button onAction="#clearFields" text="Clear" styleClass="btn-ghost"/>
+                </HBox>
+            </GridPane>
+        </VBox>
+    </bottom>
+
+</BorderPane>

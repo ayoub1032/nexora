@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.P2PContractViewController"
+            style="-fx-background-color: #f5f7fb;">
+
+    <!-- TOP HEADER -->
+    <top>
+        <HBox spacing="14" alignment="CENTER_LEFT" styleClass="admin-topbar" 
+              style="-fx-background-color: #ffffff; -fx-padding: 12px 16px; -fx-border-color: rgba(15, 23, 42, 0.10); -fx-border-width: 0 0 1 0;">
+            <Label text="P2P Contracts Marketplace" styleClass="title" style="-fx-font-size: 20px;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Back" onAction="#back" styleClass="btn-ghost"/>
+        </HBox>
+    </top>
+
+    <!-- MAIN CONTENT -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="admin-scroll">
+            <content>
+                <VBox spacing="16" styleClass="admin-content" style="-fx-padding: 16px;">
+
+                    <!-- CREATE CONTRACT SECTION -->
+                    <VBox spacing="12" styleClass="card-light" 
+                          style="-fx-padding: 16px; -fx-background-color: #ffffff; -fx-background-radius: 14; -fx-border-color: rgba(15, 23, 42, 0.10); -fx-border-width: 1; -fx-border-radius: 14;">
+                        <Label text="📝 Create P2P Contract" styleClass="page-title"/>
+
+                        <HBox spacing="12">
+                            <!-- Asset Selection -->
+                            <VBox spacing="8" HBox.hgrow="ALWAYS">
+                                <Label text="Asset:" styleClass="small-label"/>
+                                <ComboBox fx:id="cbAsset" HBox.hgrow="ALWAYS" 
+                                         style="-fx-font-size: 11px; -fx-padding: 8px; -fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: rgba(15, 23, 42, 0.14); -fx-border-width: 1; -fx-text-fill: #0f172a;"/>
+                            </VBox>
+
+                            <!-- Contract Type -->
+                            <VBox spacing="8" style="-fx-min-width: 120px;">
+                                <Label text="Type:" styleClass="small-label"/>
+                                <ComboBox fx:id="cbContractType" 
+                                         style="-fx-font-size: 11px; -fx-padding: 8px; -fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: rgba(15, 23, 42, 0.14); -fx-border-width: 1; -fx-text-fill: #0f172a;"/>
+                            </VBox>
+
+                            <!-- Quantity -->
+                            <VBox spacing="8" style="-fx-min-width: 100px;">
+                                <Label text="Qty:" styleClass="small-label"/>
+                                <TextField fx:id="tfQuantity" promptText="Quantity"
+                                          style="-fx-font-size: 11px; -fx-padding: 8px; -fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: rgba(15, 23, 42, 0.14); -fx-border-width: 1; -fx-text-fill: #0f172a; -fx-prompt-text-fill: rgba(15, 23, 42, 0.45);"/>
+                            </VBox>
+
+                            <!-- Price per Unit -->
+                            <VBox spacing="8" style="-fx-min-width: 130px;">
+                                <Label text="Price/Unit:" styleClass="small-label"/>
+                                <TextField fx:id="tfPrice" promptText="Custom price" onKeyReleased="#updateTotalPrice"
+                                          style="-fx-font-size: 11px; -fx-padding: 8px; -fx-background-color: #ffffff; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: rgba(15, 23, 42, 0.14); -fx-border-width: 1; -fx-text-fill: #0f172a; -fx-prompt-text-fill: rgba(15, 23, 42, 0.45);"/>
+                            </VBox>
+
+                            <!-- Create Button -->
+                            <VBox alignment="BOTTOM_CENTER">
+                                <Button onAction="#createContract" text="✅ Create" 
+                                       style="-fx-padding: 8 24; -fx-font-size: 12; -fx-font-weight: bold; -fx-background-color: #10b981; -fx-text-fill: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-cursor: hand;"/>
+                            </VBox>
+                        </HBox>
+
+                        <!-- Message Label -->
+                        <Label fx:id="lblMsg" text="" style="-fx-font-size: 12px; -fx-font-weight: 700; -fx-text-fill: #0f172a;"/>
+                    </VBox>
+
+                    <!-- AVAILABLE CONTRACTS TABLE -->
+                    <VBox spacing="12">
+                        <Label text="🛒 Available Contracts" styleClass="page-title"/>
+                        <TableView fx:id="contractsTable" styleClass="table-view" VBox.vgrow="ALWAYS" style="-fx-min-height: 400px;">
+                            <columns>
+                                <TableColumn fx:id="colCreator" text="Creator" prefWidth="100"/>
+                                <TableColumn fx:id="colAsset" text="Asset" prefWidth="120"/>
+                                <TableColumn fx:id="colType" text="Type" prefWidth="60"/>
+                                <TableColumn fx:id="colQuantity" text="Qty" prefWidth="60"/>
+                                <TableColumn fx:id="colPrice" text="Price/Unit" prefWidth="100"/>
+                                <TableColumn fx:id="colTotal" text="Total ($)" prefWidth="100"/>
+                                <TableColumn fx:id="colStatus" text="Status" prefWidth="80"/>
+                            </columns>
+                        </TableView>
+
+                        <!-- Accept Button -->
+                        <HBox spacing="10" style="-fx-padding: 10 0 0 0;">
+                            <Button onAction="#acceptSelectedContract" text="✅ Accept Selected Contract"
+                                   style="-fx-padding: 10 30; -fx-font-size: 12; -fx-font-weight: bold; -fx-background-color: #0ea5a5; -fx-text-fill: white; -fx-border-radius: 8; -fx-background-radius: 8; -fx-cursor: hand;"/>
+                        </HBox>
+                    </VBox>
+
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
