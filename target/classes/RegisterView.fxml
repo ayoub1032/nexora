@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="560" style="-fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.RegisterController">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="0" layoutY="0" prefHeight="600" prefWidth="560" spacing="20">
+         <children>
+            <!-- Title -->
+            <Label alignment="CENTER" prefWidth="520" text="Create Account" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="32" />
+               </font>
+            </Label>
+
+            <!-- Registration Card -->
+            <AnchorPane style="-fx-background-color: WHITE; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 30;" prefHeight="490" prefWidth="480">
+               <VBox alignment="TOP_CENTER" layoutX="10" layoutY="10" prefHeight="470" prefWidth="460" spacing="12">
+                  <children>
+                     <!-- Full Name Label -->
+                     <Label prefWidth="460" text="Full Name" textFill="#333333">
+                        <font>
+                           <Font name="System Bold" size="12" />
+                        </font>
+                     </Label>
+
+                     <!-- Full Name Input -->
+                     <TextField fx:id="tfFullName" onKeyTyped="#onFieldChanged" prefHeight="35" prefWidth="460" promptText="Enter full name" style="-fx-font-size: 12; -fx-padding: 8; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-background-radius: 5;" />
+
+                     <!-- Email Label -->
+                     <Label prefWidth="460" text="Email" textFill="#333333">
+                        <font>
+                           <Font name="System Bold" size="12" />
+                        </font>
+                     </Label>
+
+                     <!-- Email Input -->
+                     <TextField fx:id="tfEmail" onKeyTyped="#onFieldChanged" prefHeight="35" prefWidth="460" promptText="Enter email" style="-fx-font-size: 12; -fx-padding: 8; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-background-radius: 5;" />
+
+                     <!-- Password Label -->
+                     <Label prefWidth="460" text="Password (8+ chars, uppercase, lowercase, digit, special)" textFill="#333333">
+                        <font>
+                           <Font name="System Bold" size="11" />
+                        </font>
+                     </Label>
+
+                     <!-- Password Input -->
+                     <PasswordField fx:id="tfPassword" onKeyTyped="#onFieldChanged" prefHeight="35" prefWidth="460" promptText="Enter password" style="-fx-font-size: 12; -fx-padding: 8; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-background-radius: 5;" />
+
+                     <!-- Confirm Password Label -->
+                     <Label prefWidth="460" text="Confirm Password" textFill="#333333">
+                        <font>
+                           <Font name="System Bold" size="12" />
+                        </font>
+                     </Label>
+
+                     <!-- Confirm Password Input -->
+                     <PasswordField fx:id="tfConfirmPassword" onKeyTyped="#onFieldChanged" prefHeight="35" prefWidth="460" promptText="Confirm password" style="-fx-font-size: 12; -fx-padding: 8; -fx-border-color: #ddd; -fx-border-radius: 5; -fx-background-radius: 5;" />
+
+                     <!-- Error Message -->
+                     <Label fx:id="lblErrorMessage" alignment="CENTER" prefWidth="460" textFill="#cc0000" wrapText="true">
+                        <font>
+                           <Font size="10" />
+                        </font>
+                     </Label>
+
+                     <!-- Success Message -->
+                     <Label fx:id="lblSuccessMessage" alignment="CENTER" prefWidth="460" textFill="#00aa00" wrapText="true">
+                        <font>
+                           <Font size="11" />
+                        </font>
+                     </Label>
+
+                     <!-- Buttons -->
+                     <HBox alignment="CENTER" prefWidth="460" spacing="10">
+                        <children>
+                           <!-- Register Button -->
+                           <Button onAction="#handleRegister" prefHeight="40" prefWidth="220" style="-fx-font-size: 12; -fx-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand;" text="✓ Register" />
+
+                           <!-- Cancel Button -->
+                           <Button onAction="#handleCancel" prefHeight="40" prefWidth="220" style="-fx-font-size: 12; -fx-background-color: transparent; -fx-text-fill: #667eea; -fx-font-weight: bold; -fx-border-color: #667eea; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand;" text="✕ Cancel" />
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+            </AnchorPane>
+         </children>
+         <padding>
+            <Insets bottom="10" left="10" right="10" top="20" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
