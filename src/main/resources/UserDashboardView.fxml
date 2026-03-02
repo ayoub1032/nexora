@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.UserDashboardController"
+            fitToWidth="true" styleClass="scroll-pane" style="-fx-background-color: transparent;">
+
+    <VBox spacing="24" style="-fx-padding: 32;">
+        <HBox alignment="CENTER_LEFT">
+            <Label text="Overview" style="-fx-font-size: 28px; -fx-font-weight: 800; -fx-text-fill: #1e293b;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="🚪 Logout" onAction="#logout" styleClass="btn-secondary" style="-fx-border-color: #ef4444; -fx-text-fill: #ef4444; -fx-padding: 8 24;"/>
+        </HBox>
+        <Label fx:id="lblMsg" text="" />
+
+        <HBox spacing="24">
+            <!-- WALLET CARD -->
+            <VBox spacing="16" styleClass="card" HBox.hgrow="ALWAYS">
+                <HBox spacing="12" alignment="CENTER_LEFT" styleClass="card-header">
+                    <Label text="💰 My Wallet" styleClass="section-title"/>
+                </HBox>
+                
+                <HBox spacing="32">
+                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                        <Label text="Current Balance" styleClass="small-label"/>
+                        <Label fx:id="lblWalletBalance" text="0.00" styleClass="title-large" style="-fx-font-size: 36px; -fx-text-fill: #0d9488;"/>
+                    </VBox>
+                    <VBox spacing="4" alignment="BOTTOM_RIGHT" HBox.hgrow="ALWAYS">
+                        <Label text="Reserved" styleClass="small-label"/>
+                        <Label fx:id="lblWalletReserved" text="0.00" styleClass="title" style="-fx-text-fill: #f97316;"/>
+                    </VBox>
+                </HBox>
+                <!-- Wallet Actions -->
+                <HBox spacing="12" style="-fx-padding: 16 0 0 0;">
+                    <Button onAction="#showDepositDialog" text="Deposit Funds" styleClass="btn-primary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                    <Button onAction="#showWithdrawDialog" text="Withdraw" styleClass="btn-secondary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                </HBox>
+            </VBox>
+
+            <!-- PORTFOLIO CARD -->
+            <VBox spacing="16" styleClass="card" HBox.hgrow="ALWAYS">
+                <HBox spacing="12" alignment="CENTER_LEFT" styleClass="card-header">
+                    <Label text="📊 My Portfolio" styleClass="section-title"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="lblPortfolioStatus" text="Active" styleClass="badge-success"/>
+                </HBox>
+                
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Total Estimated Value" styleClass="small-label"/>
+                    <Label fx:id="lblPortfolioValue" text="0.00" styleClass="title-large" style="-fx-font-size: 36px; -fx-text-fill: #0f172a;"/>
+                </VBox>
+                
+                <!-- Portfolio Actions -->
+                <HBox spacing="12" style="-fx-padding: 16 0 0 0;">
+                    <Button onAction="#showPortfolioDetails" text="View Portfolio Assets Detail" styleClass="btn-secondary" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                </HBox>
+            </VBox>
+        </HBox>
+        
+        <Label text="Need more action? Use the navigation sidebar on the left." styleClass="small-label" style="-fx-padding: 24 0; -fx-alignment: center;" maxWidth="Infinity"/>
+    </VBox>
+</ScrollPane>
