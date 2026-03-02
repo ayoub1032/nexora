@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.UserMainController"
+            styleClass="root"
+            stylesheets="@styles/app.css">
+
+    <!-- TOP HEADER -->
+    <top>
+        <HBox spacing="16" alignment="CENTER_LEFT" styleClass="topbar">
+            <!-- Ensure Nexora's brand aesthetic -->
+            <Label text="Nexora Trading" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: 800;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="lblWelcome" text="Welcome" styleClass="small-label" style="-fx-text-fill: white; -fx-padding: 0 16 0 0;"/>
+            <Button text="Logout" onAction="#logout" styleClass="btn-ghost" style="-fx-text-fill: white; -fx-border-color: transparent;"/>
+        </HBox>
+    </top>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <left>
+        <VBox fx:id="sidebarMenu" spacing="8" styleClass="sidebar">
+            <padding>
+                <Insets top="24" right="16" bottom="24" left="16"/>
+            </padding>
+            <Label text="MAIN MENU" styleClass="sidebar-title"/>
+            
+            <Button fx:id="btnDashboard" text="📊 Dashboard" onAction="#showDashboard" styleClass="sidebar-btn" maxWidth="Infinity" alignment="BASELINE_LEFT"/>
+            <Button fx:id="btnMarket" text="📈 Asset Market" onAction="#showMarket" styleClass="sidebar-btn" maxWidth="Infinity" alignment="BASELINE_LEFT"/>
+            <Button fx:id="btnOrders" text="📋 My Orders" onAction="#showOrders" styleClass="sidebar-btn" maxWidth="Infinity" alignment="BASELINE_LEFT"/>
+            <Button fx:id="btnHistory" text="💸 Transaction History" onAction="#showHistory" styleClass="sidebar-btn" maxWidth="Infinity" alignment="BASELINE_LEFT"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+            <Label text="EXTERNAL" styleClass="sidebar-title" style="-fx-padding: 24 0 0 0;"/>
+            <Button fx:id="btnP2P" text="🛒 P2P Marketplace" onAction="#showP2P" styleClass="sidebar-btn" style="-fx-text-fill: #10b981;" maxWidth="Infinity" alignment="BASELINE_LEFT"/>
+        </VBox>
+    </left>
+
+    <!-- DYNAMIC CONTENT AREA -->
+    <center>
+        <StackPane fx:id="contentArea" style="-fx-background-color: transparent;">
+            <!-- Child views loaded here -->
+        </StackPane>
+    </center>
+
+</BorderPane>

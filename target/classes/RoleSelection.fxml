@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="tn.esprit.controllers.RoleSelectionController"
+            styleClass="root"
+            stylesheets="@styles/app.css">
+
+    <center>
+        <VBox alignment="CENTER" spacing="24" style="-fx-padding: 24;">
+            
+            <VBox alignment="CENTER" maxWidth="400" spacing="32" styleClass="card">
+                
+                <VBox spacing="8" alignment="CENTER">
+                    <Label text="Nexora" styleClass="title-large"/>
+                    <Label text="Asset &amp; Portfolio Management" styleClass="subtitle"/>
+                </VBox>
+
+                <Separator />
+
+                <VBox spacing="16" alignment="CENTER">
+                    <Label text="Select your access level:" styleClass="small-label"/>
+                    
+                    <Button onAction="#goAdmin" text="Admin Dashboard" styleClass="btn-secondary" maxWidth="Infinity" style="-fx-alignment: CENTER;"/>
+                    <Button onAction="#goUser" text="User Dashboard" styleClass="btn-primary" maxWidth="Infinity" style="-fx-alignment: CENTER;"/>
+                </VBox>
+                
+            </VBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>
